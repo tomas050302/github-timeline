@@ -9,6 +9,6 @@ export const Wrapper = styled.div`
   max-height: 920px;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
 `;

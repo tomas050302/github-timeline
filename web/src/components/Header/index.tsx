@@ -1,10 +1,13 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { Container, GitHubIcon } from './styles';
 
 const Header: React.FC = () => {
   return (
-    <Container></Container>
+    <Container>
+      <GitHubIcon />
+      <h1>GitHub Timeline</h1>
+    </Container>
   );
 };
 
