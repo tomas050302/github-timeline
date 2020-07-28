@@ -8,12 +8,11 @@ routes.get('/timeline/:username', async (request, response) => {
   const { username } = request.params;
 
   const repositories = await getUserRepositories(username);
-  return response.json(repositories);
 
   let responseInfo = [];
 
   for (let i = 0; i < repositories.length; i++) {
-    responseInfo.push = await getRepositoryInfo(username, repositories[i]);
+    responseInfo.push(await getRepositoryInfo(username, repositories[i]));
   }
 
   return response.json(responseInfo);
@@ -22,6 +21,8 @@ routes.get('/timeline/:username', async (request, response) => {
 async function getUserRepositories(username) {
   const info = await octokit.request('GET /users/{username}/repos', {
     username,
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_SECRET,
   });
 
   const repositoriesData = info.data;
@@ -35,6 +36,8 @@ async function getRepositoryInfo(username, repository) {
     {
       owner: username,
       repo: repository,
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
     }
   );
 
