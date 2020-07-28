@@ -13,7 +13,7 @@ routes.get('/timeline/:username', async (request, response) => {
   let responseInfo = [];
 
   for (let i = 0; i < repositories.length; i++) {
-    responseInfo.push = await getRepositoryDates(username, repositories[i]);
+    responseInfo.push = await getRepositoryInfo(username, repositories[i]);
   }
 
   return response.json(responseInfo);
@@ -29,7 +29,7 @@ async function getUserRepositories(username) {
   return repositoriesData.map(repository => repository.name);
 }
 
-async function getRepositoryDates(username, repository) {
+async function getRepositoryInfo(username, repository) {
   const { data } = await octokit.request(
     'GET /repos/{owner}/{repo}/stats/commit_activity',
     {
@@ -47,15 +47,18 @@ async function getRepositoryDates(username, repository) {
   const lastCommitDate = new Date(lastCommitDateUnix * 1000);
 
   return {
-    firstCommitDate: {
-      year: firstCommitDate.getFullYear(),
-      month: firstCommitDate.getUTCMonth() + 1,
-      day: firstCommitDate.getUTCDate(),
-    },
-    lastCommitDate: {
-      year: lastCommitDate.getFullYear(),
-      month: lastCommitDate.getUTCMonth() + 1,
-      day: lastCommitDate.getUTCDate(),
+    name: repository,
+    dates: {
+      firstCommitDate: {
+        year: firstCommitDate.getFullYear(),
+        month: firstCommitDate.getUTCMonth() + 1,
+        day: firstCommitDate.getUTCDate(),
+      },
+      lastCommitDate: {
+        year: lastCommitDate.getFullYear(),
+        month: lastCommitDate.getUTCMonth() + 1,
+        day: lastCommitDate.getUTCDate(),
+      },
     },
   };
 }
