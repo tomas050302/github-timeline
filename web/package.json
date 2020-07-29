@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-event-timeline": "^1.6.3",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
     "styled-icons": "^10.12.0",
