@@ -23,8 +23,8 @@ yarn start
 
 👤 **Tomás Lopes**
 
-* Twitter: [@tomas050302](https://twitter.com/tomas050302)
-* Github: [@tomas050302](https://github.com/tomas050302)
+- Twitter: [@tomas050302](https://twitter.com/tomas050302)
+- Github: [@tomas050302](https://github.com/tomas050302)
 
 ## Show your support
 
@@ -32,10 +32,12 @@ Give a ⭐️ if this project helped you!
 
 ## Technologies used in this project
 
-* ReactJS
-* NodeJS
-* Typescript
-* GitHub REST API
+- ReactJS
+- NodeJS
+- Typescript
+- GitHub REST API
+- [React Event Timeline](https://github.com/rcdexta/react-event-timeline)
 
-***
+---
+
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
