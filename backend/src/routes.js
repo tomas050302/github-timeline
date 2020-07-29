@@ -52,16 +52,8 @@ async function getRepositoryInfo(username, repository) {
   return {
     name: repository,
     dates: {
-      firstCommitDate: {
-        year: firstCommitDate.getFullYear(),
-        month: firstCommitDate.getUTCMonth() + 1,
-        day: firstCommitDate.getUTCDate(),
-      },
-      lastCommitDate: {
-        year: lastCommitDate.getFullYear(),
-        month: lastCommitDate.getUTCMonth() + 1,
-        day: lastCommitDate.getUTCDate(),
-      },
+      firstCommitDate,
+      lastCommitDate,
     },
   };
 }
