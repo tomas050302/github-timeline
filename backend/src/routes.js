@@ -1,10 +1,10 @@
-const { Router } = require('express');
-const { Octokit } = require('@octokit/core');
+const { Router } = require("express");
+const { Octokit } = require("@octokit/core");
 const octokit = new Octokit();
 
 const routes = Router();
 
-routes.get('/timeline/:username', async (request, response) => {
+routes.get("/timeline/:username", async (request, response) => {
   const { username } = request.params;
 
   const repositories = await getUserRepositories(username);
@@ -15,11 +15,15 @@ routes.get('/timeline/:username', async (request, response) => {
     responseInfo.push(await getRepositoryInfo(username, repositories[i]));
   }
 
-  return response.json(responseInfo);
+  const sorted = responseInfo.sort(
+    (a, b) => a.dates.firstCommitDate - b.dates.firstCommitDate
+  );
+
+  return response.json(sorted);
 });
 
 async function getUserRepositories(username) {
-  const info = await octokit.request('GET /users/{username}/repos', {
+  const info = await octokit.request("GET /users/{username}/repos", {
     username,
     client_id: process.env.CLIENT_ID,
     client_secret: process.env.CLIENT_SECRET,
@@ -27,12 +31,12 @@ async function getUserRepositories(username) {
 
   const repositoriesData = info.data;
 
-  return repositoriesData.map(repository => repository.name);
+  return repositoriesData.map((repository) => repository.name);
 }
 
 async function getRepositoryInfo(username, repository) {
   const { data } = await octokit.request(
-    'GET /repos/{owner}/{repo}/stats/commit_activity',
+    "GET /repos/{owner}/{repo}/stats/commit_activity",
     {
       owner: username,
       repo: repository,
@@ -41,7 +45,7 @@ async function getRepositoryInfo(username, repository) {
     }
   );
 
-  const weeks = data.filter(week => week.total > 0);
+  const weeks = data.filter((week) => week.total > 0);
 
   const firstCommitDateUnix = weeks[0].week;
   const lastCommitDateUnix = weeks[weeks.length - 1].week;
