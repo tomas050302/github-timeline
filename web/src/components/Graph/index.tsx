@@ -21,14 +21,12 @@ const Graph: React.FC<Props> = ({ data }) => {
           {data.map(repository => (
             <TimelineEvent
               title={repository.name}
-              subtitle={`From ${new Date(
-                repository.dates.firstCommitDate
-              ).toDateString()} to ${new Date(
-                repository.dates.lastCommitDate
-              ).toDateString()}`}
-              createdAt={repository.dates.firstCommitDate}
+              createdAt={new Date(repository.dates.firstCommitDate)}
               key={repository.name}
-            ></TimelineEvent>
+            >
+              From {new Date(repository.dates.firstCommitDate).toDateString()}
+              to {new Date(repository.dates.lastCommitDate).toDateString()}
+            </TimelineEvent>
           ))}
         </Timeline>
       ) : null}

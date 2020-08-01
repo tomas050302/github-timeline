@@ -1,3 +1,1 @@
-export {
-  Github,
-} from 'styled-icons/boxicons-logos/'
+export { Github } from 'styled-icons/boxicons-logos/';
